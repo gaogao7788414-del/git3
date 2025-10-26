@@ -329,9 +329,85 @@ class Calculator {
     }
 }
 
+// 颜色选择器类
+class ColorPicker {
+    constructor() {
+        this.colorPicker = document.getElementById('btnColorPicker');
+        this.addBtn = document.getElementById('addBtn');
+        this.resetBtn = document.getElementById('resetColorBtn');
+        this.defaultColor = '#667eea';
+        this.init();
+    }
+
+    init() {
+        this.loadSavedColor();
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        this.colorPicker.addEventListener('input', (e) => {
+            this.updateButtonColor(e.target.value);
+            this.saveColor(e.target.value);
+        });
+
+        this.resetBtn.addEventListener('click', () => {
+            this.resetColor();
+        });
+    }
+
+    updateButtonColor(color) {
+        // 计算渐变色（稍微深一点的色调）
+        const darkerColor = this.darkenColor(color);
+        
+        this.addBtn.style.background = `linear-gradient(135deg, ${color} 0%, ${darkerColor} 100%)`;
+        this.addBtn.style.color = 'white';
+        
+        // 更新hover效果
+        const shadowColor = this.hexToRgba(color, 0.4);
+        this.addBtn.addEventListener('mouseenter', function() {
+            this.style.boxShadow = `0 5px 15px ${shadowColor}`;
+        });
+    }
+
+    hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    darkenColor(color) {
+        // 简单的颜色变暗算法
+        const hex = color.replace('#', '');
+        const r = Math.max(0, parseInt(hex.substr(0, 2), 16) - 30);
+        const g = Math.max(0, parseInt(hex.substr(2, 2), 16) - 30);
+        const b = Math.max(0, parseInt(hex.substr(4, 2), 16) - 30);
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+    }
+
+    saveColor(color) {
+        localStorage.setItem('buttonColor', color);
+    }
+
+    loadSavedColor() {
+        const savedColor = localStorage.getItem('buttonColor');
+        if (savedColor) {
+            this.colorPicker.value = savedColor;
+            this.updateButtonColor(savedColor);
+        }
+    }
+
+    resetColor() {
+        this.colorPicker.value = this.defaultColor;
+        this.updateButtonColor(this.defaultColor);
+        this.saveColor(this.defaultColor);
+    }
+}
+
 // 初始化应用
 document.addEventListener('DOMContentLoaded', () => {
     new TodoApp();
     new Calculator();
+    new ColorPicker();
 });
 

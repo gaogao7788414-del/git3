@@ -119,6 +119,56 @@ h1 {
     color: white;
 }
 
+.color-picker-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.color-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.color-picker {
+    width: 50px;
+    height: 35px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    background: none;
+    padding: 2px;
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+}
+
+.reset-color-btn {
+    padding: 8px 15px;
+    background: #f0f0f0;
+    color: #666;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.reset-color-btn:hover {
+    background: #e0e0e0;
+    border-color: #d0d0d0;
+}
+
 .todo-list {
     list-style: none;
     max-height: 400px;
