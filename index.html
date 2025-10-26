@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo列表</title>
+    <title>Todo列表 v1</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="todo-app">
-            <h1>📝 我的Todo列表</h1>
+            <h1>📝 我的Todo列表 <span class="version-badge">v1</span></h1>
             
             <div class="input-section">
                 <input type="text" id="todoInput" placeholder="输入新的任务..." class="todo-input">
@@ -26,7 +26,10 @@
             
             <div class="footer">
                 <span id="taskCount">0 个任务</span>
-                <button id="clearCompleted" class="clear-btn">清除已完成</button>
+                <div class="footer-right">
+                    <span class="version-text">v1</span>
+                    <button id="clearCompleted" class="clear-btn">清除已完成</button>
+                </div>
             </div>
         </div>
     </div>
