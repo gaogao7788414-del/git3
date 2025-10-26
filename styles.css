@@ -72,7 +72,7 @@ h1 {
 
 .add-btn {
     padding: 15px 30px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
     color: white;
     border: none;
     border-radius: 10px;
@@ -84,7 +84,7 @@ h1 {
 
 .add-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
 }
 
 .add-btn:active {
