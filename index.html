@@ -31,6 +31,45 @@
                     <button id="clearCompleted" class="clear-btn">清除已完成</button>
                 </div>
             </div>
+
+            <!-- 计算器按钮 -->
+            <button id="calcToggle" class="calc-toggle-btn">🔢 计算器</button>
+        </div>
+
+        <!-- 计算器面板 -->
+        <div id="calculator" class="calculator-panel hidden">
+            <div class="calc-header">
+                <h2>计算器</h2>
+                <button id="calcClose" class="calc-close-btn">✕</button>
+            </div>
+            <div class="calc-display">
+                <input type="text" id="calcDisplay" readonly value="0">
+            </div>
+            <div class="calc-buttons">
+                <button class="calc-btn clear">AC</button>
+                <button class="calc-btn clear">C</button>
+                <button class="calc-btn operator" data-operator="%">%</button>
+                <button class="calc-btn operator" data-operator="/">÷</button>
+                
+                <button class="calc-btn number" data-number="7">7</button>
+                <button class="calc-btn number" data-number="8">8</button>
+                <button class="calc-btn number" data-number="9">9</button>
+                <button class="calc-btn operator" data-operator="*">×</button>
+                
+                <button class="calc-btn number" data-number="4">4</button>
+                <button class="calc-btn number" data-number="5">5</button>
+                <button class="calc-btn number" data-number="6">6</button>
+                <button class="calc-btn operator" data-operator="-">−</button>
+                
+                <button class="calc-btn number" data-number="1">1</button>
+                <button class="calc-btn number" data-number="2">2</button>
+                <button class="calc-btn number" data-number="3">3</button>
+                <button class="calc-btn operator" data-operator="+">+</button>
+                
+                <button class="calc-btn number zero" data-number="0">0</button>
+                <button class="calc-btn number" data-number=".">.</button>
+                <button class="calc-btn equals">=</button>
+            </div>
         </div>
     </div>
     

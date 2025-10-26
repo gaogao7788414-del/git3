@@ -202,8 +202,136 @@ class TodoApp {
     }
 }
 
+// 计算器类
+class Calculator {
+    constructor() {
+        this.display = document.getElementById('calcDisplay');
+        this.currentValue = '0';
+        this.previousValue = null;
+        this.operator = null;
+        this.waitingForValue = false;
+        this.init();
+    }
+
+    init() {
+        const toggleBtn = document.getElementById('calcToggle');
+        const closeBtn = document.getElementById('calcClose');
+        const buttons = document.querySelectorAll('.calc-btn');
+
+        toggleBtn.addEventListener('click', () => this.show());
+        closeBtn.addEventListener('click', () => this.hide());
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.handleClick(e.target);
+            });
+        });
+    }
+
+    show() {
+        document.getElementById('calculator').classList.remove('hidden');
+    }
+
+    hide() {
+        document.getElementById('calculator').classList.add('hidden');
+    }
+
+    handleClick(button) {
+        const text = button.textContent;
+
+        if (button.classList.contains('number')) {
+            this.inputNumber(text);
+        } else if (button.classList.contains('operator')) {
+            this.inputOperator(button.dataset.operator);
+        } else if (button.classList.contains('equals')) {
+            this.calculate();
+        } else if (button.classList.contains('clear')) {
+            if (text === 'AC') {
+                this.reset();
+            } else {
+                this.clear();
+            }
+        }
+    }
+
+    inputNumber(num) {
+        if (this.waitingForValue) {
+            this.currentValue = num;
+            this.waitingForValue = false;
+        } else {
+            this.currentValue = this.currentValue === '0' ? num : this.currentValue + num;
+        }
+        this.updateDisplay();
+    }
+
+    inputOperator(op) {
+        const currentValue = parseFloat(this.currentValue);
+
+        if (this.previousValue === null) {
+            this.previousValue = currentValue;
+        } else if (this.operator) {
+            const result = this.performCalculation();
+            this.currentValue = String(result);
+            this.previousValue = result;
+            this.updateDisplay();
+        }
+
+        this.waitingForValue = true;
+        this.operator = op;
+    }
+
+    performCalculation() {
+        const prev = parseFloat(this.previousValue);
+        const curr = parseFloat(this.currentValue);
+
+        switch (this.operator) {
+            case '+':
+                return prev + curr;
+            case '-':
+                return prev - curr;
+            case '*':
+                return prev * curr;
+            case '/':
+                return curr !== 0 ? prev / curr : 0;
+            case '%':
+                return prev % curr;
+            default:
+                return curr;
+        }
+    }
+
+    calculate() {
+        if (this.previousValue !== null && this.operator) {
+            const result = this.performCalculation();
+            this.currentValue = String(result);
+            this.previousValue = null;
+            this.operator = null;
+            this.waitingForValue = true;
+            this.updateDisplay();
+        }
+    }
+
+    clear() {
+        this.currentValue = '0';
+        this.updateDisplay();
+    }
+
+    reset() {
+        this.currentValue = '0';
+        this.previousValue = null;
+        this.operator = null;
+        this.waitingForValue = false;
+        this.updateDisplay();
+    }
+
+    updateDisplay() {
+        this.display.value = this.currentValue;
+    }
+}
+
 // 初始化应用
 document.addEventListener('DOMContentLoaded', () => {
     new TodoApp();
+    new Calculator();
 });
 
